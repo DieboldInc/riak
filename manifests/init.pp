@@ -13,39 +13,39 @@ class riak{
 		ensure => installed;
 	}~>
 #	file {
-#	  "/home/diebold/riak_1.3.1-1_amd64.deb":
+#	  "~/riak_1.3.1-1_amd64.deb":
 #		ensure => "present",
 #		source => "puppet:///modules/riak/riak_1.3.1-1_amd64.deb";
-#	  "/home/diebold/riak-cs_1.3.1-1_amd64.deb":
+#	  "~/riak-cs_1.3.1-1_amd64.deb":
 #		ensure =>"present",
 #		source => "puppet:///modules/riak/riak-cs_1.3.1-1_amd64.deb";
-#	   "/home/diebold/stanchion_1.3.1.1-1_amd64.deb":
+#	   "~/stanchion_1.3.1.1-1_amd64.deb":
 #		ensure => "present",
 #		source => "puppet:///modules/riak/stanchion_1.3.1.1-1_amd64.deb";
 #	} ~>
 	exec {
 	 "Get riak":
 	   command => "sudo wget http://s3.amazonaws.com/downloads.basho.com/riak/1.3/1.3.1/ubuntu/precise/riak_1.3.1-1_amd64.deb",
- 	   cwd     => "/home/diebold",
+ 	   cwd     => "~/",
 	   creates => "/etc/riak";
 	 "Get stanchion":
 	   command => "sudo wget http://s3.amazonaws.com/downloads.basho.com/stanchion/1.3/1.3.1.1/ubuntu/precise/stanchion_1.3.1.1-1_amd64.deb",
-	   cwd     => "/home/diebold",
+	   cwd     => "~/",
 	   creates => "/etc/stanchion";
 	 "Get riak cs":
 	   command => "sudo wget http://s3.amazonaws.com/downloads.basho.com/riak-cs/1.3/1.3.1/ubuntu/precise/riak-cs_1.3.1-1_amd64.deb",
-	   cwd     => "/home/diebold",
+	   cwd     => "~/",
 	   creates => "/etc/riak-cs";
 	}~>
 	exec {
 	 "install riak":
-	   command => "sudo dpkg -i /home/diebold/riak_1.3.1-1_amd64.deb", 		
+	   command => "sudo dpkg -i ~/riak_1.3.1-1_amd64.deb", 		
 	   creates => "/etc/riak";
 	 "install riak-cs":
-	   command => "sudo dpkg -i /home/diebold/riak-cs_1.3.1-1_amd64.deb",
+	   command => "sudo dpkg -i ~/riak-cs_1.3.1-1_amd64.deb",
 	   creates => "/etc/riak-cs";
 	 "install stanchion": 
-	   command => "sudo dpkg -i /home/diebold/stanchion_1.3.1.1-1_amd64.deb",
+	   command => "sudo dpkg -i ~/stanchion_1.3.1.1-1_amd64.deb",
 	   creates => "/etc/stanchion"; 	
 	}~> 
 	file {
